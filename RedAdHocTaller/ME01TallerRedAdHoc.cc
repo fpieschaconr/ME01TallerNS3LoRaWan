@@ -78,7 +78,7 @@ using namespace ns3;
 //
 // Define logging keyword for this file
 //
-NS_LOG_COMPONENT_DEFINE ("MixedWireless");
+NS_LOG_COMPONENT_DEFINE ("RedAdHocTaller");// cambio - fpieschaconr
 
 //
 // This function will be used below as a trace sink, if the command-line
@@ -98,7 +98,7 @@ main (int argc, char *argv[])
   // First, we declare and initialize a few local variables that control some
   // simulation parameters.
   //
-  uint32_t backboneNodes = 10;
+  uint32_t backboneNodes = 7; // cambio - fpieschaconr
   uint32_t infraNodes = 2;
   uint32_t lanNodes = 2;
   uint32_t stopTime = 20;
@@ -391,24 +391,24 @@ main (int argc, char *argv[])
   // Let's set up some ns-2-like ascii traces, using another helper class
   //
   AsciiTraceHelper ascii;
-  Ptr<OutputStreamWrapper> stream = ascii.CreateFileStream ("mixed-wireless.tr");
+  Ptr<OutputStreamWrapper> stream = ascii.CreateFileStream ("red-ad-hoc-taller.tr"); // cambio - fpieschaconr
   wifiPhy.EnableAsciiAll (stream);
   csma.EnableAsciiAll (stream);
   internet.EnableAsciiIpv4All (stream);
 
   // Csma captures in non-promiscuous mode
-  csma.EnablePcapAll ("mixed-wireless", false);
+  csma.EnablePcapAll ("red-ad-hoc-taller", false); // cambio - fpieschaconr
   // pcap captures on the backbone wifi devices
-  wifiPhy.EnablePcap ("mixed-wireless", backboneDevices, false);
+  wifiPhy.EnablePcap ("red-ad-hoc-taller", backboneDevices, false); // cambio - fpieschaconr
   // pcap trace on the application data sink
-  wifiPhy.EnablePcap ("mixed-wireless", appSink->GetId (), 0);
+  wifiPhy.EnablePcap ("red-ad-hoc-taller", appSink->GetId (), 0); // cambio - fpieschaconr
 
   if (useCourseChangeCallback == true)
     {
       Config::Connect ("/NodeList/*/$ns3::MobilityModel/CourseChange", MakeCallback (&CourseChangeCallback));
     }
 
-  AnimationInterface anim ("mixed-wireless.xml");
+  AnimationInterface anim ("red-ad-hoc-taller.xml"); // cambio - fpieschaconr
 
   ///////////////////////////////////////////////////////////////////////////
   //                                                                       //
